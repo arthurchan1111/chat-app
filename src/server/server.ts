@@ -12,7 +12,7 @@ export class Server{
 
   constructor(){
     this.createHTTPServer();
-    this.createSocket()
+    this.createSocket();
     this.get();
     this.loadAssets();
     this.listen();
@@ -31,7 +31,7 @@ export class Server{
   }
 
   private get():void{
-    this.app.get('*', (req,res) => res.sendFile(path.resolve(__dirname ,"../../index.html")));
+    this.app.get('*', (req:any,res:any) => res.sendFile(path.resolve(__dirname ,"../../index.html")));
   }
 
   private createSocket():void{
@@ -44,7 +44,7 @@ export class Server{
       console.log("A user connected");
 
       socket.on('disconnect', () => console.log('user disconnected'));
-      socket.on('chat message' (msg)=> io.emit('chat message', msg));
+      socket.on('chat message', (msg:string)=> this.io.emit('chat message', msg));
     });
   }
 
